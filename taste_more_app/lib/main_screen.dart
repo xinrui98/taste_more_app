@@ -22,9 +22,31 @@ class MainScreenState extends State<MainScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DatabaseReference databaseReference;
 
+  var _searchview = new TextEditingController();
+  bool _firstSearch = true;
+  String _query = "";
+  List<FoodFeedback> _filterList;
+
+  MainScreenState() {
+//Register a closure to be called when the object changes.
+    _searchview.addListener(() {
+      if (_searchview.text.isEmpty) {
+//Notify the framework that the internal state of this object has changed.
+        setState(() {
+          _firstSearch = true;
+          _query = "";
+        });
+      } else {
+        setState(() {
+          _firstSearch = false;
+          _query = _searchview.text;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     databaseReference = database.reference().child("food_feedbacks");
@@ -39,7 +61,7 @@ class MainScreenState extends State<MainScreen> {
 
       for (var individualKey in KEYS) {
         FoodFeedback foodFeedback =
-            new FoodFeedback(DATA['title'], DATA['location'], DATA['comment']);
+        new FoodFeedback(DATA['title'], DATA['location'], DATA['comment']);
         print(foodFeedback.title);
 
         foodFeedBackMessages.add(foodFeedback);
@@ -67,97 +89,74 @@ class MainScreenState extends State<MainScreen> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return new UploadDataPage();
                 }));
+                for (foodFeedback in foodFeedBackMessages) {
+                  print(foodFeedback.title);
+                }
               }),
         ],
       ),
       key: _scaffoldKey,
-      body: Stack(fit: StackFit.expand, children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/main_screen.jpg'),
-              fit: BoxFit.fitHeight,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/main_screen.jpg"),
+            fit: BoxFit.cover,
+          ),),
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              flex: 0,
+              child: Center(
+                child: Form(
+                  key: formKey,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    children: <Widget>[
+                      ListTile(
+                          leading: Icon(Icons.search),
+                          title: TextField(
+                            controller: _searchview,
+                            decoration: InputDecoration(
+                              hintText: "Restaurant Title",
+                              hintStyle: new TextStyle(color: Colors.grey[300]),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-
-        Container(
-          child: foodFeedBackMessages.length == 0
-              ? new Text("No Feedbacks Available")
-              : new ListView.builder(
+            _firstSearch ?
+            Flexible(
+              child: foodFeedBackMessages.length == 0
+                  ? new Text("No Feedbacks Available")
+                  : new ListView.builder(
                   reverse: false,
                   itemCount: foodFeedBackMessages.length,
                   itemBuilder: (_, index) {
                     return feedbackMessagesUI(
                         foodFeedBackMessages[
-                                foodFeedBackMessages.length - index - 1]
+                        foodFeedBackMessages.length - index - 1]
                             .title,
                         foodFeedBackMessages[
-                                foodFeedBackMessages.length - index - 1]
+                        foodFeedBackMessages.length - index - 1]
                             .location,
                         foodFeedBackMessages[
-                                foodFeedBackMessages.length - index - 1]
+                        foodFeedBackMessages.length - index - 1]
                             .comment,
                         index);
                   }),
+            ) : _performSearch(),
+          ],
         ),
-
-//        Container(
-//          child: Column(
-//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//            children: <Widget>[
-////              FloatingActionButton(
-////                child: new Icon(Icons.add),
-////                onPressed: () {
-//////                  _showFormDialog();
-////                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-////                    return new UploadDataPage();
-////                  }));
-////                },
-////              ),
-//              Flexible(
-//                child: FirebaseAnimatedList(
-//                  query: databaseReference,
-//                  itemBuilder: (_, DataSnapshot snapshot,
-//                      Animation<double> animation, int index) {
-//                    return new Card(
-//                      child: ListTile(
-//                        leading: CircleAvatar(
-//                          child: Text(foodFeedBackMessages[index]
-//                              .title
-//                              .substring(0, 1)),
-//                          backgroundColor: Colors.red,
-//                        ),
-//                        title: ListTile(
-//                            title: Text("Title  : " +
-//                                foodFeedBackMessages[index].title),
-//                            subtitle: Text("Location  : " +
-//                                foodFeedBackMessages[index].location)),
-//                        subtitle: Text("Comments  : " +
-//                            foodFeedBackMessages[index].comment),
-//                        trailing: Listener(
-//                          key: Key(foodFeedBackMessages[index].key),
-//                          child: Icon(
-//                            Icons.remove_circle,
-//                            color: Colors.redAccent,
-//                          ),
-//                          onPointerDown: (pointerEvent) => handleRemove(
-//                              foodFeedBackMessages[index].key, index),
-//                        ),
-//                      ),
-//                    );
-//                  },
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
-      ]),
+      ),
     );
   }
 
-  Widget feedbackMessagesUI(
-      String title, String location, String comment, int index) {
+  Widget feedbackMessagesUI(String title, String location, String comment,
+      int index) {
     return new Card(
       elevation: 3.0,
       margin: EdgeInsets.all(5.0),
@@ -168,28 +167,105 @@ class MainScreenState extends State<MainScreen> {
           children: <Widget>[
             new ListTile(
               title: new Text("Title: $title",
-                  style: Theme.of(context).textTheme.title),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .title),
               subtitle: new Text("Location: $location",
-                  style: Theme.of(context).textTheme.subhead),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subhead),
               trailing: Listener(
-                key: Key(foodFeedBackMessages[index].key),
+//                key: Key(foodFeedBackMessages[index].key),
                 child: Icon(
                   Icons.remove_circle,
                   color: Colors.redAccent,
                 ),
-                onPointerDown: (pointerEvent) => handleRemove(
-                    foodFeedBackMessages[
-                            foodFeedBackMessages.length - index - 1].key,
-                    foodFeedBackMessages.length - index - 1),
+                onPointerDown: (pointerEvent) =>
+                    handleRemove(
+                        foodFeedBackMessages[
+                        foodFeedBackMessages.length - index - 1]
+                            .key,
+                        foodFeedBackMessages.length - index - 1),
               ),
             ),
             new Text(
               "Comment: $comment",
-              style: Theme.of(context).textTheme.subtitle,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subtitle,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  //Perform actual search
+  Widget _performSearch() {
+    _filterList = new List<FoodFeedback>();
+    for (int i = 0; i < foodFeedBackMessages.length; i++) {
+      var foodFeedBackTitle = foodFeedBackMessages[i].title;
+      var foodFeedBack = foodFeedBackMessages[i];
+      if (foodFeedBackTitle.toLowerCase().contains(_query.toLowerCase())) {
+        _filterList.add(foodFeedBack);
+      }
+    }
+    return _createFilteredListView();
+  }
+
+  //Create the Filtered ListView
+  Widget _createFilteredListView() {
+    return new Flexible(
+      child: new ListView.builder(
+          itemCount: _filterList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new Card(
+              elevation: 3.0,
+              margin: EdgeInsets.all(5.0),
+              child: new Container(
+                padding: new EdgeInsets.all(5.0),
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new ListTile(
+                      title: new Text("Title: ${_filterList[index].title}",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .title),
+                      subtitle: new Text(
+                          "Location: ${_filterList[index].location}",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subhead),
+//                      trailing: Listener(
+////                key: Key(foodFeedBackMessages[index].key),
+//                        child: Icon(
+//                          Icons.remove_circle,
+//                          color: Colors.redAccent,
+//                        ),
+//                        onPointerDown: (pointerEvent) => handleRemove(
+//                            foodFeedBackMessages[
+//                            foodFeedBackMessages.length - index - 1].key,
+//                            foodFeedBackMessages.length - index - 1),
+//                      ),
+                    ),
+                    new Text(
+                      "Comment: ${_filterList[index].comment}",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .subtitle,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
     );
   }
 
@@ -261,11 +337,12 @@ class MainScreenState extends State<MainScreen> {
                     title: TextFormField(
                       autofocus: true,
                       decoration:
-                          InputDecoration(hintText: "Title of Restaurant"),
+                      InputDecoration(hintText: "Title of Restaurant"),
                       keyboardType: TextInputType.multiline,
                       initialValue: "",
                       onSaved: (val) => foodFeedback.title = val,
-                      validator: (val) => val == ""
+                      validator: (val) =>
+                      val == ""
                           ? "please input the restaurant's title"
                           : null,
                     ),
@@ -280,7 +357,8 @@ class MainScreenState extends State<MainScreen> {
                       ),
                       keyboardType: TextInputType.multiline,
                       onSaved: (val) => foodFeedback.location = val,
-                      validator: (val) => val == ""
+                      validator: (val) =>
+                      val == ""
                           ? "please input the restaurant's location"
                           : null,
                     ),
@@ -295,7 +373,7 @@ class MainScreenState extends State<MainScreen> {
                       maxLines: 4,
                       onSaved: (val) => foodFeedback.comment = val,
                       validator: (val) =>
-                          val == "" ? "please leave a comment" : null,
+                      val == "" ? "please leave a comment" : null,
                     ),
                   ),
                 ],

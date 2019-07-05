@@ -115,8 +115,8 @@ class _UploadDataPageState extends State<UploadDataPage> {
               RaisedButton(
                 elevation: 10.0,
                 child: Text("Submit Feedback"),
-                textColor: Colors.white70,
-                color: Colors.pink,
+                textColor: Colors.white,
+                color: Colors.blue,
                 onPressed: uploadStatusFeedback,
               )
             ],
