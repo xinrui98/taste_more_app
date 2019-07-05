@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "595065524287",
+    "firebase_url": "https://tastemore-7433c.firebaseio.com",
+    "project_id": "tastemore-7433c",
+    "storage_bucket": "tastemore-7433c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595065524287:android:104b8a2a7d3e5f8e",
+        "android_client_info": {
+          "package_name": "tastemore.com.taste_more_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595065524287-9q24ut169lnbq1c8p335il25nq66ja7a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tastemore.com.taste_more_app",
+            "certificate_hash": "f934c2ea09ab7e26a78157a4ae01b20819dfc282"
+          }
+        },
+        {
+          "client_id": "595065524287-f60avl6885b7m49k6c9c23p17h08h5gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMLKIjB9iRRoC4I16ELH-xroz3tlHFVJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595065524287-f60avl6885b7m49k6c9c23p17h08h5gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
