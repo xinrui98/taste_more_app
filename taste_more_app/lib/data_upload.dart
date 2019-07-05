@@ -63,6 +63,7 @@ class _UploadDataPageState extends State<UploadDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
+        backgroundColor: Colors.green,
         title: new Text("Upload Feedback"),
         centerTitle: true,
       ),
@@ -77,37 +78,46 @@ class _UploadDataPageState extends State<UploadDataPage> {
           key: formKey,
           child: Column(
             children: <Widget>[
-              TextFormField(
-                decoration: new InputDecoration(labelText: "Restaurant Title"),
-                validator: (value) {
-                  return value.isEmpty ? "Title is required" : null;
-                },
-                onSaved: (value) {
-                  return _title = value;
-                },
-              ),
-              TextFormField(
-                decoration:
-                    new InputDecoration(labelText: "Restaurant Location"),
-                validator: (value) {
-                  return value.isEmpty ? "Location is required" : null;
-                },
-                onSaved: (value) {
-                  return _location = value;
-                },
-              ),
-              TextFormField(
-                decoration: new InputDecoration(
-                  labelText: "Restaurant Comments",
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: new InputDecoration(labelText: "Restaurant Title"),
+                  validator: (value) {
+                    return value.isEmpty ? "Title is required" : null;
+                  },
+                  onSaved: (value) {
+                    return _title = value;
+                  },
                 ),
-                keyboardType: TextInputType.multiline,
-                maxLines: 4,
-                validator: (value) {
-                  return value.isEmpty ? "Comment is required" : null;
-                },
-                onSaved: (value) {
-                  return _comment = value;
-                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration:
+                      new InputDecoration(labelText: "Restaurant Location"),
+                  validator: (value) {
+                    return value.isEmpty ? "Location is required" : null;
+                  },
+                  onSaved: (value) {
+                    return _location = value;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: new InputDecoration(
+                    labelText: "Restaurant Comments",
+                  ),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 4,
+                  validator: (value) {
+                    return value.isEmpty ? "Comment is required" : null;
+                  },
+                  onSaved: (value) {
+                    return _comment = value;
+                  },
+                ),
               ),
               SizedBox(
                 height: 15.0,
@@ -116,7 +126,7 @@ class _UploadDataPageState extends State<UploadDataPage> {
                 elevation: 10.0,
                 child: Text("Submit Feedback"),
                 textColor: Colors.white,
-                color: Colors.blue,
+                color: Colors.green,
                 onPressed: uploadStatusFeedback,
               )
             ],
