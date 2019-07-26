@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'about_screen.dart';
 import 'all_data_screen.dart';
 import 'learn_screen.dart';
 import 'main_screen.dart';
@@ -10,26 +11,21 @@ ThemeData _baseTheme = ThemeData(
   canvasColor: Colors.transparent,
 );
 
-
 class Home extends StatefulWidget {
-
-
   @override
   State<StatefulWidget> createState() {
-
-
     return HomeState();
   }
 }
 
-class HomeState extends State<Home> with SingleTickerProviderStateMixin{
+class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
   MainScreen mainScreen;
   AllDataScreen allDataScreen;
   LearnScreen learnScreen;
+  AboutScreen aboutScreen;
   List pages;
   final PageStorageBucket bucket = PageStorageBucket();
-
 
   @override
   void initState() {
@@ -37,8 +33,9 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin{
     super.initState();
     mainScreen = MainScreen();
     learnScreen = LearnScreen();
+    aboutScreen = AboutScreen();
 
-    pages = [mainScreen,learnScreen];
+    pages = [mainScreen, learnScreen, aboutScreen];
   }
 
   @override
@@ -47,68 +44,72 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin{
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: _baseTheme,
       debugShowCheckedModeBanner: false,
-      home: (Platform.isIOS) ? SafeArea(
-        child: Scaffold(
-          body: Stack(children: <Widget>[PageStorage(bucket: bucket, child: pages[selectedIndex]),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                    canvasColor: Colors.transparent,
-                    primaryColor: Colors.red,
-                    textTheme: Theme.of(context)
-                        .textTheme
-                        .copyWith(caption: TextStyle(color: Colors.white70))),
-                child: BottomNavigationBar(
-                  type: BottomNavigationBarType.fixed,
-                  items: <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.home), title: Text("Home")),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.spa), title: Text("Learn")),
-                  ],
-                  currentIndex: selectedIndex,
-                  fixedColor: Colors.white,
-                  onTap: _onItemTapped,
+      home: (Platform.isIOS)
+          ? SafeArea(
+              child: Scaffold(
+                body: Stack(children: <Widget>[
+                  PageStorage(bucket: bucket, child: pages[selectedIndex]),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                          canvasColor: Colors.transparent,
+                          primaryColor: Colors.red,
+                          textTheme: Theme.of(context).textTheme.copyWith(
+                              caption: TextStyle(color: Colors.white70))),
+                      child: BottomNavigationBar(
+                        type: BottomNavigationBarType.fixed,
+                        items: <BottomNavigationBarItem>[
+                          BottomNavigationBarItem(
+                              icon: Icon(Icons.home), title: Text("Home")),
+                          BottomNavigationBarItem(
+                              icon: Icon(Icons.spa), title: Text("Learn")),
+                          BottomNavigationBarItem(
+                              icon: Icon(Icons.info), title: Text("About")),
+                        ],
+                        currentIndex: selectedIndex,
+                        fixedColor: Colors.white,
+                        onTap: _onItemTapped,
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
+            )
+          : Scaffold(
+              body: Stack(children: <Widget>[
+                pages[selectedIndex],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                        canvasColor: Colors.transparent,
+                        primaryColor: Colors.red,
+                        textTheme: Theme.of(context).textTheme.copyWith(
+                            caption: TextStyle(color: Colors.white70))),
+                    child: BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      items: <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.home), title: Text("Home")),
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.spa), title: Text("Learn")),
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.info), title: Text("About")),
+                      ],
+                      currentIndex: selectedIndex,
+                      fixedColor: Colors.white,
+                      onTap: _onItemTapped,
+                    ),
+                  ),
                 ),
-              ),
+              ]),
             ),
-          ]),
-        ),
-      ) : Scaffold(
-        body: Stack(children: <Widget>[pages[selectedIndex],
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Theme(
-              data: Theme.of(context).copyWith(
-                  canvasColor: Colors.transparent,
-                  primaryColor: Colors.red,
-                  textTheme: Theme.of(context)
-                      .textTheme
-                      .copyWith(caption: TextStyle(color: Colors.white70))),
-              child: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home), title: Text("Home")),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.spa), title: Text("Learn")),
-                ],
-                currentIndex: selectedIndex,
-                fixedColor: Colors.white,
-                onTap: _onItemTapped,
-              ),
-            ),
-          ),
-        ]),
-      ),
     );
   }
 

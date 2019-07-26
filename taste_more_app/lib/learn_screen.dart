@@ -9,11 +9,16 @@ class LearnScreenState extends State<LearnScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.green,
+        title: new Text("Taste More, Waste Less!"),
+        centerTitle: true,
+      ),
       body: new Stack(
         children: <Widget>[
           new Center(
             child: new Image.asset(
-              'assets/learn_screen.jpg',
+              'assets/background_fruits.jpg',
               width: 490.0,
               height: 1200.0,
               fit: BoxFit.fill,
@@ -25,82 +30,129 @@ class LearnScreenState extends State<LearnScreen> {
               padding: const EdgeInsets.all(20.0),
               children: <Widget>[
                 Card(
-                  child: new ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LearnOurTechnologies()));
-                      },
-                      title: new Text(
-                        "Skip the Straw",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
-                      )),
+                  child: Container(
+                    child: new ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LearnOurTechnologies()));
+                        },
+                        title: new Text(
+                          "Skip the Straw",
+                          style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic),
+                        )),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/card_background.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
                 Card(
-                  child: new ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LearnOurTechnologies()));
-                      },
-                      title: new Text(
-                        "Less is More",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
-                      )),
+                  child: Container(
+                    child: new ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LearnOurTechnologies()));
+                        },
+                        title: new Text(
+                          "Less is More",
+                          style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic),
+                        )),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/card_background.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
                 Card(
-                  child: new ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LearnOurTechnologies()));
-                      },
-                      title: new Text(
-                        "Say NO to Extras",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
-                      )),
-                ), Card(
-                  child: new ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LearnOurTechnologies()));
-                      },
-                      title: new Text(
-                        "Don't be afraid to Ask",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
-                      )),
-                ),Card(
-                  child: new ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LearnOurTechnologies()));
-                      },
-                      title: new Text(
-                        "Do your part, use this app!",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
-                      )),
+                  child: Container(
+                    child: new ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LearnOurTechnologies()));
+                        },
+                        title: new Text(
+                          "Say No to Extras",
+                          style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic),
+                        )),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/card_background.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: Container(
+                    child: new ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LearnOurTechnologies()));
+                        },
+                        title: new Text(
+                          "Don't be afraid to ask",
+                          style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic),
+                        )),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/card_background.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: Container(
+                    child: new ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LearnOurTechnologies()));
+                        },
+                        title: new Text(
+                          "Do your part, use this App!",
+                          style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic),
+                        )),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/card_background.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -113,7 +165,7 @@ class LearnScreenState extends State<LearnScreen> {
 
 class LearnOurTechnologies extends StatelessWidget {
   String _learnTechnologyDescription =
-  '''Combining the latest advances in psychoacoustics and energy medicine, our brainwave synchronization technology - ‘Brain Enhance' features the unique soundtrack, the unique audio equipment and the perfect combination of them. All of these have been carefully engineered and tested to show that they are capable of improving your mind, especially your sleeping, towards a better state.
+      '''Combining the latest advances in psychoacoustics and energy medicine, our brainwave synchronization technology - ‘Brain Enhance' features the unique soundtrack, the unique audio equipment and the perfect combination of them. All of these have been carefully engineered and tested to show that they are capable of improving your mind, especially your sleeping, towards a better state.
 
 1. Our soundtracks - Brain Wave Subliminals, are exclusively created by Dr. Mariarosa Greco Ph.D. and Giancarlo Tarozzi, using their 20 years of research, expertise, and experience in integrative medicine and neuroscience. These tracks are imbued with binaural and/or isochronic rhythms, embedded with Delta waves as the first step and Theta and/or Epsilon waves as the second and deeper step, together with subliminal messages from Dr. Mariarosa Greco's voice for even deeper and more effective subconscious re-programming to help you achieve the desired state with greater ease and efficiency. 
 

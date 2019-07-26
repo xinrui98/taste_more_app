@@ -9,6 +9,8 @@ import 'model/food_feedback.dart';
 import 'package:flutter/services.dart';
 import 'data_upload.dart';
 
+
+
 class MainScreen extends StatefulWidget {
   @override
   MainScreenState createState() => MainScreenState();
@@ -110,7 +112,8 @@ class MainScreenState extends State<MainScreen> {
               centerTitle: true,
               actions: <Widget>[
                 new IconButton(
-                    icon: new Icon(Icons.add_comment),
+                    icon: new Icon(Icons.add_comment,
+                    size: 35.0,),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -143,7 +146,7 @@ class MainScreenState extends State<MainScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/main_screen.jpg"),
+            image: AssetImage("assets/background_strawberry.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -157,16 +160,16 @@ class MainScreenState extends State<MainScreen> {
                   direction: Axis.vertical,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.fastfood),
+                      leading: Icon(Icons.fastfood, color: Colors.black87,),
                       title: TextField(
                         controller: _searchTitleTextController,
                         decoration: InputDecoration(
                           hintText: "Restaurant Title",
-                          hintStyle: new TextStyle(color: Colors.grey),
+                          hintStyle: new TextStyle(color: Colors.black54),
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      trailing: Icon(Icons.search),
+                      trailing: Icon(Icons.search, color: Colors.black87,),
                     ),
                   ],
                 ),
@@ -180,16 +183,16 @@ class MainScreenState extends State<MainScreen> {
                   direction: Axis.vertical,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.location_on),
+                      leading: Icon(Icons.location_on, color: Colors.black87,),
                       title: TextField(
                         controller: _searchLocationTextController,
                         decoration: InputDecoration(
                           hintText: "Restaurant Location",
-                          hintStyle: new TextStyle(color: Colors.grey),
+                          hintStyle: new TextStyle(color: Colors.black54),
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      trailing: Icon(Icons.search),
+                      trailing: Icon(Icons.search, color: Colors.black87,),
                     ),
                   ],
                 ),
@@ -233,8 +236,8 @@ class MainScreenState extends State<MainScreen> {
   Widget feedbackMessagesUI(
       String title, String location, String comment, int index) {
     return new Card(
-      elevation: 3.0,
-      margin: EdgeInsets.all(5.0),
+//      elevation: 1.0,
+      margin: EdgeInsets.fromLTRB(12.0, 2.0, 12.0, 2.0),
       child: new Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -242,7 +245,7 @@ class MainScreenState extends State<MainScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        padding: new EdgeInsets.all(5.0),
+//        padding: new EdgeInsets.all(3.0),
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -330,8 +333,8 @@ class MainScreenState extends State<MainScreen> {
           itemCount: _filterList.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
-              elevation: 3.0,
-              margin: EdgeInsets.all(10.0),
+//              elevation: 1.0,
+              margin: EdgeInsets.fromLTRB(12.0, 2.0, 12.0, 2.0),
               child: new Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -339,7 +342,7 @@ class MainScreenState extends State<MainScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                padding: new EdgeInsets.all(10.0),
+//                padding: new EdgeInsets.all(3.0),
                 child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -415,7 +418,7 @@ class MainScreenState extends State<MainScreen> {
     });
   }
 
-//  List<FoodFeedback> getData() {
+  //  List<FoodFeedback> getData() {
 //    foodFeedBackMessages.forEach((item) => debugPrint(item.title));
 //    return foodFeedBackMessages;
 //  }

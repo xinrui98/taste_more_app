@@ -28,11 +28,24 @@ dependencies:
   firebase_database: ^3.0.3
   intl: ^0.15.8
   font_awesome_flutter: ^8.0.1
+  flutter_launcher_icons: ^0.7.0
+  geolocator: ^5.1.1+1
+
+
+
+
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_icon.jpg"
+
 
 
 # For information on the generic Dart part of this file, see the
@@ -48,10 +61,25 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/app_icon.jpg
     - assets/main_screen.jpg
     - assets/learn_screen.jpg
     - assets/card_background.jpg
     - assets/card_background2.jpg
+    - assets/upload_background.jpg
+    - assets/upload_background2.jpg
+    - assets/about_screen.jpg
+    - assets/background_lemon.jpg
+    - assets/background_sandwich.jpg
+    - assets/background_coffee.jpg
+    - assets/background_notes.jpg
+    - assets/background_earth.jpg
+    - assets/background_fruits.jpg
+    - assets/background_leaf.jpg
+    - assets/background_tomato.jpg
+    - assets/background_strawberry.jpg
+    - assets/background_milk.jpg
+    - assets/background_cake.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
